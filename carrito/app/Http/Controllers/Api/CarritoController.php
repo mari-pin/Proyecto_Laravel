@@ -13,9 +13,13 @@ class CarritoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request)
     {
-        //
+
+       $response = Carrito::where('id_user', '=', $request['id_user'])->get();
+
+
+        return response()->json($response, 200);
     }
 
     /**

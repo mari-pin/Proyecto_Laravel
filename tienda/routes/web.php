@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UserController;
@@ -27,5 +28,6 @@ Route::resource('productos', ProductoController::class)->only('index', 'show')->
 Route::get('login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('carrito', [CarritoController::class, 'getCarrito']);
 
 
