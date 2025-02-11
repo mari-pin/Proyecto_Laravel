@@ -29,5 +29,9 @@ Route::get('login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('carrito', [CarritoController::class, 'getCarrito']);
+Route::get('postCarrito', [CarritoController::class, 'postCarrito'])->name('postCarrito');
+Route::get('putCarrito', [CarritoController::class, 'putCarrito'])->name('putCarrito');
+Route::get('deleteCarrito', [CarritoController::class, 'deleteCarrito'])->name('deleteCarrito');
+
 
 

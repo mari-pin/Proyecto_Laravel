@@ -13,7 +13,8 @@ class CarritoController extends Controller
 
         $response = Http::withToken('nrDd0neP7q')->get('http://carrito/api/carrito', ['id_user' => auth()->user()->id]);
 
-        return $response->body();
+         $carritoVistas = $response->body();
+         return view('carrito.index', compact('carritoVistas'));
 
     }
 
@@ -24,13 +25,13 @@ class CarritoController extends Controller
 
 
     public function postCarrito(){
-        $response = Http::withToken('nrDd0neP7q')->post('http://carrito/api/carrito/', ['id_user' => auth()->user()->id, 'id_producto'=> 2,'nombre_producto'=>'pantalon', 'precio_producto' => 20, 'cantidad_producto' => 4]);
+        $response = Http::withToken('nrDd0neP7q')->withOptions(['allow_redirects'=>false])->post('http://carrito/api/carrito', ['id_user' => auth()->user()->id, 'id_producto'=> 5,'nombre_producto'=>'pantalon', 'precio_producto' => 20, 'cantidad_producto' => 4]);
         return $response->body();
     }
 
 
     public function deleteCarrito(){
-        $response = Http::withToken('nrDd0neP7q')->delete('http://carrito/api/carrito/'. auth()->user()->id);
+        $response = Http::withToken('nrDd0neP7q')->delete('http://carrito/api/carrito/'. auth()->user()->id,['id_producto'=>5]);
         return $response->body();
     }
 }
