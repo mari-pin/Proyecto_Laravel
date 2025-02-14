@@ -1,15 +1,61 @@
-
 @extends('plantilla')
 @section('titulo', 'Carrito')
 @section('contenido')
 
-<h1>Carrito</h1>
+    <h1>Carrito</h1>
 
 
-<a href="{{route('postCarrito')}}">Añadir al Carrito</a>
-<a href="{{route('putCarrito')}}">Modificar Carrito</a>
-<a href="{{route('deleteCarrito')}}">Eliminar Carrito</a>
+    <Table class="table">
+        <thead>
+            <td class="col">Nombre</td>
+            <td class="col">Cantidad</td>
+            <td class="col">Precio Unidad</td>
+            <td class="col">Total</td>
+            <td class="col" colspan="2">Acciones</td>
+
+        </thead>
+            <?php $totalPrecio = 0 ;?>
+
+            @forelse($carritoVistas as $lineaCarrito)
+            <tr>
+
+                <td class="col">
+
+                    {{ $lineaCarrito['nombre_producto'] }}
+                </td>
+                <td class="col">
+                   <form action="{{route('putCarrito')}}" method="GET">
+                    @method('GET')
+                    @csrf
+
+                    <input type="number" min="1" value="{{ $lineaCarrito['cantidad_producto']}}" name="cantidad_producto" >
+                    <input type="text" hidden value="{{ $lineaCarrito['id_producto']}}" name="id_producto">
+                    <input type="submit" value="Modificar">
+
+                   </form>
+
+                </td>
+                <td class="col"> {{ $lineaCarrito['precio_producto'] }}</td>
+
+                <td> {{ $lineaCarrito['cantidad_producto'] * $lineaCarrito['precio_producto'] }}</td>
+
+                <td class="col"><a href="{{route('deleteCarrito', $lineaCarrito)}}">Eliminar</a></td>
+                {{$totalPrecio +=  $lineaCarrito['cantidad_producto'] * $lineaCarrito['precio_producto'] }}
+            </tr>
+            @empty
+
+
+            @endforelse
+
+            <tr>
+                <td colspan="3">Total</td>
+                <td colspan="2">{{$totalPrecio}}</td>
+            </tr>
+
+    </Table>
+
+
+
 
 
 @endsection
-{{$carritoVistas}}
