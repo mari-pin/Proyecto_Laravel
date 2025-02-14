@@ -16,7 +16,7 @@
 
 
                     @if (auth()->user()->rol == 'admin')
-                        
+
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
                                 href="{{ route('users.index') }}">Usuarios</a>
@@ -30,8 +30,16 @@
 
                 @endif
 
+
             </ul>
 
+
+            @if (auth()->check())
+
+
+                <a class="nav-link mr-auto" href="{{ route('carrito') }}">Carrito</a>
+
+            @endif
         </div>
     </div>
 </nav>
