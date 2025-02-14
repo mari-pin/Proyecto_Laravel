@@ -10,6 +10,7 @@
     <img class="w-25 h-25" src = "{{ $producto->imagen }}"/>
 </div>
 
-<a href="{{ route('productos.index') }}">Volver al Listado</a>
+
+<a href="{{ route('postCarrito', $producto)}}">Añadir al carrito</a>
 
 @endsection
