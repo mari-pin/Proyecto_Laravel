@@ -53,8 +53,7 @@
             </tr>
 
     </Table>
-
-
+     <a href="{{route('confirmarPedido')}}"><button class="btn btn-success">Confirmar Pedido</button></a>
 
 
 
