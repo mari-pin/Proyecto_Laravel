@@ -45,6 +45,8 @@
 
     </Table>
 
+    <a href="{{route('productos.index')}}"><button class="btn btn-success">Volver al inicio</button></a>
+
 
 
 

@@ -18,9 +18,9 @@
     <tr>
         <td>{{ $producto->nombre }}</td>
         <td>{{ $producto->precio }}</td>
-        <td><img style="width: 50px; height:50px;" src ="{{ $producto->imagen }}" alt="camiseta"></td>
+        <td><img style="width: 100px; height:100px;" src ="{{ $producto->imagen }}" alt="{{$producto->nombre}}"></td>
 
-        <td><a href="{{route('productos.show', $producto)}}">Ver Producto</a></td>
+        <td><a href="{{route('productos.show', $producto)}}"><button class="btn btn-success">Ver Producto</button></a></td>
 
     </tr>
 @empty

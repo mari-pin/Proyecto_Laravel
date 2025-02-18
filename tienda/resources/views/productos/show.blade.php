@@ -10,7 +10,13 @@
     <img class="w-25 h-25" src = "{{ $producto->imagen }}"/>
 </div>
 
+<form action="{{ route('postCarrito', $producto)}}" method="get" class="mb-5">
+    @method('GET')
+    @csrf
+    <input type="number" value="1" min="1" name="valorInicial">
+    <input type="submit" value="Añadir al carrito" class="btn btn-success">
+</form>
 
-<a href="{{ route('postCarrito', $producto)}}">Añadir al carrito</a>
+
 
 @endsection

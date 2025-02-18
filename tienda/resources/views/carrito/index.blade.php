@@ -14,7 +14,7 @@
             <td class="col" colspan="2">Acciones</td>
 
         </thead>
-            <?php $totalPrecio = 0 ;?>
+
 
             @forelse($carritoVistas as $lineaCarrito)
             <tr>
@@ -40,7 +40,7 @@
                 <td> {{ $lineaCarrito['cantidad_producto'] * $lineaCarrito['precio_producto'] }}</td>
 
                 <td class="col"><a href="{{route('deleteCarrito', $lineaCarrito)}}">Eliminar</a></td>
-                {{$totalPrecio +=  $lineaCarrito['cantidad_producto'] * $lineaCarrito['precio_producto'] }}
+
             </tr>
             @empty
 
@@ -55,6 +55,7 @@
     </Table>
      <a href="{{route('confirmarPedido')}}"><button class="btn btn-success">Confirmar Pedido</button></a>
 
+     <a href="{{route('productos.index')}}"><button class="btn btn-primary">Seguir comprando</button></a>
 
 
 @endsection

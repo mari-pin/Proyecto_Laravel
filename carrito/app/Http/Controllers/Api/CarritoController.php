@@ -32,14 +32,25 @@ class CarritoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-       $carrito = new Carrito();
-       $carrito-> id_user = $request['id_user'];
-       $carrito ->id_producto = $request['id_producto'];
-       $carrito -> nombre_producto = $request['nombre_producto'];
-       $carrito->cantidad_producto = $request['cantidad_producto'];
-        $carrito->precio_producto = $request['precio_producto'];
-        $carrito->save();
+
+    { $carrito =  Carrito::where('id_user', '=', $request['id_user'])->where('id_producto', '=', $request['id_producto'])->first();
+
+        if($carrito){
+
+         $carrito->cantidad_producto = $carrito->cantidad_producto +  $request['cantidad_producto'];
+
+         $carrito->save();
+
+        }else{
+            $carrito = new Carrito();
+            $carrito-> id_user = $request['id_user'];
+            $carrito ->id_producto = $request['id_producto'];
+            $carrito -> nombre_producto = $request['nombre_producto'];
+            $carrito->cantidad_producto = $request['cantidad_producto'];
+             $carrito->precio_producto = $request['precio_producto'];
+             $carrito->save();
+        }
+
 
         return response()->json('created');
 

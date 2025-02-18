@@ -17,8 +17,16 @@ class CarritoController extends Controller
 
         $response = Http::withToken('nrDd0neP7q')->get('http://carrito/api/carrito', ['id_user' => auth()->user()->id]);
 
-         $carritoVistas = json_decode($response->body(), true);
-         return view('carrito.index', compact('carritoVistas'));
+        $carritoVistas = json_decode($response->body(), true);
+
+        $totalPrecio = 0;
+        foreach ($carritoVistas as $lineaCarrito) {
+
+            $totalPrecio +=  $lineaCarrito['cantidad_producto'] * $lineaCarrito['precio_producto'];
+
+        }
+
+         return view('carrito.index', compact('carritoVistas', 'totalPrecio'));
 
     }
 
@@ -33,7 +41,7 @@ class CarritoController extends Controller
 
 
 
-        $response = Http::withToken('nrDd0neP7q')->withOptions(['allow_redirects'=>false])->post('http://carrito/api/carrito', ['id_user' => auth()->user()->id, 'id_producto'=> $producto->id,'nombre_producto'=>$producto->nombre, 'precio_producto' => $producto->precio, 'cantidad_producto' => 1]);
+        $response = Http::withToken('nrDd0neP7q')->withOptions(['allow_redirects'=>false])->post('http://carrito/api/carrito', ['id_user' => auth()->user()->id, 'id_producto'=> $producto->id,'nombre_producto'=>$producto->nombre, 'precio_producto' => $producto->precio, 'cantidad_producto' => $request['valorInicial']]);
 
         return redirect()->route('carrito');
     }
